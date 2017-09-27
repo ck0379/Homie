@@ -16,6 +16,7 @@
 import Foundation
 import UIKit
 import CoreData
+import GoogleMaps
 
 class ToDoTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, ToDoItemDelegate {
     
@@ -45,6 +46,25 @@ class ToDoTableViewController: UITableViewController, NSFetchedResultsController
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        let camera = GMSCameraPosition.camera(withLatitude:1.285, longitude:103.848, zoom:6)
+        let mapView = GMSMapView.map(withFrame: .zero, camera: camera)
+        mapView.mapType = GMSMapViewType.normal
+        mapView.isIndoorEnabled = true
+        mapView.accessibilityElementsHidden = false
+        mapView.isMyLocationEnabled = true
+        mapView.settings.myLocationButton = true
+        mapView.settings.compassButton = true
+        
+        // The myLocation attribute of the mapView may be null
+        if let mylocation = mapView.myLocation {
+            print("User's location: \(mylocation)")
+        } else {
+            print("User's location is unknown")
+        }
+        
+        //mapView.animate(toLocation:(mapView.myLocation?.coordinate)!)
+        self.view = mapView
+        
         let client = MSClient(applicationURLString: "https://homie.azurewebsites.net")
         let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).managedObjectContext!
         self.store = MSCoreDataStore(managedObjectContext: managedObjectContext)
@@ -57,7 +77,7 @@ class ToDoTableViewController: UITableViewController, NSFetchedResultsController
             try self.fetchedResultController.performFetch()
         } catch let error1 as NSError {
             error = error1
-            print("Unresolved error \(error), \(error?.userInfo)")
+            print("Unresolved error \(String(describing: error)), \(String(describing: error?.userInfo))")
             abort()
         }
 
