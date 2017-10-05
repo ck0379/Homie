@@ -3,14 +3,10 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		064E996280B6C402E6B76B59 /* libPods-Homie.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38E277C83A1805A7C75E1567 /* libPods-Homie.a */; };
-		6FF4F6031F765BCF008D083E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF4F6001F7653F4008D083E /* SystemConfiguration.framework */; };
-		6FF4F6041F765BD2008D083E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF4F5FE1F7653E9008D083E /* QuartzCore.framework */; };
-		6FF4F6051F765BD6008D083E /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FF4F5FC1F7653DE008D083E /* OpenGLES.framework */; };
 		9C35A4B41DE4EF8000650581 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C35A4B31DE4EF8000650581 /* SafariServices.framework */; };
 		9C35A4B61DE4EF8500650581 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C35A4B51DE4EF8500650581 /* Security.framework */; };
 		9CA121761DAC7FFD000C2FCA /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CA121751DAC7FFD000C2FCA /* WebKit.framework */; };
@@ -18,28 +14,16 @@
 		A2D9CBC41943C2540017F096 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D9CBC31943C2540017F096 /* AppDelegate.swift */; };
 		A2D9CBCC1943C2540017F096 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2D9CBCA1943C2540017F096 /* Main.storyboard */; };
 		A2D9CBCE1943C2540017F096 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2D9CBCD1943C2540017F096 /* Images.xcassets */; };
-		A2D9CBE41943C39D0017F096 /* ToDoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D9CBE31943C39D0017F096 /* ToDoTableViewController.swift */; };
+		A2D9CBE41943C39D0017F096 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D9CBE31943C39D0017F096 /* MapViewController.swift */; };
 		A2E767C6194594DC00869113 /* ToDoItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E767C5194594DC00869113 /* ToDoItemViewController.swift */; };
 		A31A89F71BF3FDFA00C7B656 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A31A89F61BF3FDFA00C7B656 /* Launch Screen.storyboard */; };
 		A3BBD77D1C05181600DD0DB0 /* MicrosoftAzureMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3BBD77C1C05181600DD0DB0 /* MicrosoftAzureMobile.framework */; };
+		F7229E9DD9F84A761A791D1F /* Pods_Homie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9FD7D0AF91FACF1B09BE975 /* Pods_Homie.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0A4E3C2AED9375C07D561515 /* Pods-Homie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Homie.release.xcconfig"; path = "Pods/Target Support Files/Pods-Homie/Pods-Homie.release.xcconfig"; sourceTree = "<group>"; };
-		38E277C83A1805A7C75E1567 /* libPods-Homie.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Homie.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6E7A43532EA7D49B4F78BBB3 /* Pods-Homie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Homie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Homie/Pods-Homie.debug.xcconfig"; sourceTree = "<group>"; };
-		6FF4F5EA1F7650B9008D083E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		6FF4F5EC1F7650CC008D083E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		6FF4F5EE1F7650DF008D083E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		6FF4F5F01F7650EC008D083E /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
-		6FF4F5F21F7650F9008D083E /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
-		6FF4F5F41F765109008D083E /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
-		6FF4F5F61F7653AD008D083E /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
-		6FF4F5F81F7653B5008D083E /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
-		6FF4F5FA1F7653D0008D083E /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		6FF4F5FC1F7653DE008D083E /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		6FF4F5FE1F7653E9008D083E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		6FF4F6001F7653F4008D083E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		030A567D0EEC5EC45CFB29A9 /* Pods-Homie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Homie.release.xcconfig"; path = "Pods/Target Support Files/Pods-Homie/Pods-Homie.release.xcconfig"; sourceTree = "<group>"; };
+		252C1A7EFAF1A9E9837E33F8 /* Pods-Homie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Homie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Homie/Pods-Homie.debug.xcconfig"; sourceTree = "<group>"; };
 		9C35A4B31DE4EF8000650581 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		9C35A4B51DE4EF8500650581 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9CA121751DAC7FFD000C2FCA /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -49,11 +33,12 @@
 		A2D9CBC31943C2540017F096 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A2D9CBCB1943C2540017F096 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A2D9CBCD1943C2540017F096 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		A2D9CBE31943C39D0017F096 /* ToDoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoTableViewController.swift; sourceTree = "<group>"; };
+		A2D9CBE31943C39D0017F096 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		A2D9CBE81943D1340017F096 /* Homie-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Homie-Bridging-Header.h"; sourceTree = "<group>"; };
 		A2E767C5194594DC00869113 /* ToDoItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoItemViewController.swift; sourceTree = "<group>"; };
 		A31A89F61BF3FDFA00C7B656 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		A3BBD77C1C05181600DD0DB0 /* MicrosoftAzureMobile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MicrosoftAzureMobile.framework; sourceTree = "<group>"; };
+		D9FD7D0AF91FACF1B09BE975 /* Pods_Homie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Homie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,37 +48,31 @@
 			files = (
 				9C35A4B61DE4EF8500650581 /* Security.framework in Frameworks */,
 				9C35A4B41DE4EF8000650581 /* SafariServices.framework in Frameworks */,
-				6FF4F6041F765BD2008D083E /* QuartzCore.framework in Frameworks */,
-				6FF4F6051F765BD6008D083E /* OpenGLES.framework in Frameworks */,
 				9CA121761DAC7FFD000C2FCA /* WebKit.framework in Frameworks */,
 				A3BBD77D1C05181600DD0DB0 /* MicrosoftAzureMobile.framework in Frameworks */,
-				6FF4F6031F765BCF008D083E /* SystemConfiguration.framework in Frameworks */,
-				064E996280B6C402E6B76B59 /* libPods-Homie.a in Frameworks */,
+				F7229E9DD9F84A761A791D1F /* Pods_Homie.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		13980C59419FEBC8612F6A89 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				252C1A7EFAF1A9E9837E33F8 /* Pods-Homie.debug.xcconfig */,
+				030A567D0EEC5EC45CFB29A9 /* Pods-Homie.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		9CA121741DAC7FFD000C2FCA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6FF4F6001F7653F4008D083E /* SystemConfiguration.framework */,
-				6FF4F5FE1F7653E9008D083E /* QuartzCore.framework */,
-				6FF4F5FC1F7653DE008D083E /* OpenGLES.framework */,
-				6FF4F5FA1F7653D0008D083E /* libz.tbd */,
-				6FF4F5F81F7653B5008D083E /* libc++.tbd */,
-				6FF4F5F61F7653AD008D083E /* libicucore.tbd */,
-				6FF4F5F41F765109008D083E /* ImageIO.framework */,
-				6FF4F5F21F7650F9008D083E /* GLKit.framework */,
-				6FF4F5F01F7650EC008D083E /* CoreText.framework */,
-				6FF4F5EE1F7650DF008D083E /* CoreLocation.framework */,
-				6FF4F5EC1F7650CC008D083E /* CoreData.framework */,
-				6FF4F5EA1F7650B9008D083E /* AVFoundation.framework */,
 				9C35A4B51DE4EF8500650581 /* Security.framework */,
 				9C35A4B31DE4EF8000650581 /* SafariServices.framework */,
 				9CA121751DAC7FFD000C2FCA /* WebKit.framework */,
-				38E277C83A1805A7C75E1567 /* libPods-Homie.a */,
+				D9FD7D0AF91FACF1B09BE975 /* Pods_Homie.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -104,7 +83,7 @@
 				A2D9CBC01943C2540017F096 /* Homie */,
 				A2D9CBBF1943C2540017F096 /* Products */,
 				9CA121741DAC7FFD000C2FCA /* Frameworks */,
-				FF7364376F262E4E5077F34C /* Pods */,
+				13980C59419FEBC8612F6A89 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -124,7 +103,7 @@
 				A2D9CBCA1943C2540017F096 /* Main.storyboard */,
 				A2D9CBCD1943C2540017F096 /* Images.xcassets */,
 				A2D9CBC11943C2540017F096 /* Supporting Files */,
-				A2D9CBE31943C39D0017F096 /* ToDoTableViewController.swift */,
+				A2D9CBE31943C39D0017F096 /* MapViewController.swift */,
 				A2E767C5194594DC00869113 /* ToDoItemViewController.swift */,
 				A2D9CBE51943CB520017F096 /* frameworks */,
 				A2D9CBE81943D1340017F096 /* Homie-Bridging-Header.h */,
@@ -150,15 +129,6 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
-		FF7364376F262E4E5077F34C /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				6E7A43532EA7D49B4F78BBB3 /* Pods-Homie.debug.xcconfig */,
-				0A4E3C2AED9375C07D561515 /* Pods-Homie.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -166,12 +136,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A2D9CBDD1943C2540017F096 /* Build configuration list for PBXNativeTarget "Homie" */;
 			buildPhases = (
-				AB4A050DA969DEF1142C14B1 /* [CP] Check Pods Manifest.lock */,
+				062A11CD3C857F8A31C69D17 /* [CP] Check Pods Manifest.lock */,
 				A2D9CBBA1943C2540017F096 /* Sources */,
 				A2D9CBBB1943C2540017F096 /* Frameworks */,
 				A2D9CBBC1943C2540017F096 /* Resources */,
-				D7B40D24E62AD7E8C6AF0CA3 /* [CP] Embed Pods Frameworks */,
-				B0A562536BD1BF7A8D3CC8D0 /* [CP] Copy Pods Resources */,
+				540AA67E7CA0D55C343302C4 /* [CP] Embed Pods Frameworks */,
+				472E1DB33FED9CB48A6D53C5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -195,14 +165,13 @@
 				TargetAttributes = {
 					A2D9CBBD1943C2540017F096 = {
 						CreatedOnToolsVersion = 6.0;
-						DevelopmentTeam = 6R2XS3A8UQ;
+						DevelopmentTeam = G538KTPERV;
 						LastSwiftMigration = 0820;
-						ProvisioningStyle = Automatic;
 					};
 				};
 			};
 			buildConfigurationList = A2D9CBB91943C2540017F096 /* Build configuration list for PBXProject "Homie" */;
-			compatibilityVersion = "Xcode 8.0";
+			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -233,7 +202,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		AB4A050DA969DEF1142C14B1 /* [CP] Check Pods Manifest.lock */ = {
+		062A11CD3C857F8A31C69D17 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -251,7 +220,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B0A562536BD1BF7A8D3CC8D0 /* [CP] Copy Pods Resources */ = {
+		472E1DB33FED9CB48A6D53C5 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -270,15 +239,26 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Homie/Pods-Homie-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D7B40D24E62AD7E8C6AF0CA3 /* [CP] Embed Pods Frameworks */ = {
+		540AA67E7CA0D55C343302C4 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Homie/Pods-Homie-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GooglePlacesAPI/GooglePlacesAPI.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/SRCountdownTimer/SRCountdownTimer.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GooglePlacesAPI.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SRCountdownTimer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -294,7 +274,7 @@
 			files = (
 				A2E767C6194594DC00869113 /* ToDoItemViewController.swift in Sources */,
 				A2BD20971AC8A731007F7181 /* QSTodoDataModel.xcdatamodeld in Sources */,
-				A2D9CBE41943C39D0017F096 /* ToDoTableViewController.swift in Sources */,
+				A2D9CBE41943C39D0017F096 /* MapViewController.swift in Sources */,
 				A2D9CBC41943C2540017F096 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -404,13 +384,12 @@
 		};
 		A2D9CBDE1943C2540017F096 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6E7A43532EA7D49B4F78BBB3 /* Pods-Homie.debug.xcconfig */;
+			baseConfigurationReference = 252C1A7EFAF1A9E9837E33F8 /* Pods-Homie.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = 6R2XS3A8UQ;
+				DEVELOPMENT_TEAM = G538KTPERV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -418,9 +397,8 @@
 				INFOPLIST_FILE = Homie/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Microsoft.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.group.Homie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Homie/Homie-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -429,12 +407,11 @@
 		};
 		A2D9CBDF1943C2540017F096 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0A4E3C2AED9375C07D561515 /* Pods-Homie.release.xcconfig */;
+			baseConfigurationReference = 030A567D0EEC5EC45CFB29A9 /* Pods-Homie.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 6R2XS3A8UQ;
+				DEVELOPMENT_TEAM = G538KTPERV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -442,9 +419,8 @@
 				INFOPLIST_FILE = Homie/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Microsoft.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = com.group.Homie;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Homie/Homie-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};

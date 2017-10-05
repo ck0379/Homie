@@ -14,19 +14,19 @@
 // limitations under the License.
 //
 import UIKit
-import GooglePlaces
 import GoogleMaps
+import GooglePlaces
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
                             
     var window: UIWindow?
+    var googleAPIKey = "AIzaSyByfiKGyVy282tfCt2AdGtj3WncPcNJlnA"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        GMSPlacesClient.provideAPIKey("AIzaSyBrChj62bAVTZeMZQfktOV1kxc7OMwfpEg")
-        GMSServices.provideAPIKey("AIzaSyBrChj62bAVTZeMZQfktOV1kxc7OMwfpEg")
-        
+        GMSServices.provideAPIKey(googleAPIKey)
+        GMSPlacesClient.provideAPIKey(googleAPIKey)
         return true
     }
 
