@@ -259,6 +259,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate,CLLocationManagerD
             self.end.isHidden = true
             self.startLocation.text = ""
             self.destinationLocation.text = ""
+            self.displayLabel.text = ""
         })
         let arriveSafelyAction = UIAlertAction(title: "I've arrived safely", style: UIAlertActionStyle.default, handler: { (action) -> Void in
             self.googleMaps.clear()
