@@ -3,10 +3,6 @@ This repository is used to manage the source code of COMP90018 Mobile Computing 
 
 // COMP90018 Mobile Computing Assgnment2
 // IOS Mobile APP: Homie  - Become your safe companions on your way.
-// Group Member:
-// 732329 Jinghan Liang
-// 732355 Zhen Jia
-// 764696 Renyi Hou
 //
 //  Created by group:homie on 2017/9/20.
 //  Copyright © 2017 group:Homie. All rights reserved.
@@ -20,6 +16,15 @@ This is an IOS Mobile App to enable safety about decision-making. Your can get f
 Your companions can access your start location, destination, route, transportation mode and real-time location by typing correctly your username and accesscode that you sent to them. They can also obtain your time and distance rest to your location. 
 
 If you arrive your destination, you should "end your trip" by clicking "I've arrived safely", then your friends will be notified.
+
+=================================================================================================
+
+Installation and start-up
+
+If you need to test the mobile app function.
+please make sure 
+1. -- pod install (change to the Homie profile with podfile inside it)
+2. -- In the login board, input login username: 001, password: 123456
 
 =================================================================================================
 

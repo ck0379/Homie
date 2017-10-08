@@ -161,7 +161,7 @@ class AddCompanionViewController: UIViewController,UITableViewDelegate,UITableVi
     //**************************************************************//
     
     func configuredMessageComposeViewController() -> MFMessageComposeViewController{
-        self.friendsPhoNum = ["0426499520","0466667777"]
+        self.friendsPhoNum = ["0426499520","0451528797"]
         let accessCode = Int(arc4random()%10000)+1
         //var query = MSQuery()
         //let table = client.table(withName: "user_location")
