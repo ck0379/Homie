@@ -147,7 +147,6 @@ public class SRCountdownTimer: UIView {
                 }
             } else {
                 self.end()
-                // pop up the alert view 
             }
         }
         RunLoop.main.add(timer!, forMode: .defaultRunLoopMode)
@@ -181,5 +180,14 @@ public class SRCountdownTimer: UIView {
         timer?.invalidate()
         
         delegate?.timerDidEnd?()
+    }
+    
+    public func isEnd() -> Bool{
+        if(self.currentCounterValue == 0){
+            return true
+        }
+        else{
+            return false
+        }
     }
 }

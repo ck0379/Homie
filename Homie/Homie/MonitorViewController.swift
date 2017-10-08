@@ -1,10 +1,15 @@
+// COMP90018 Mobile Computing Assgnment2
+// IOS Mobile APP: Homie  - Become your safe companions on your way.
+// Group Member:
+// 732329 Jinghan Liang
+// 732355 Zhen Jia
+// 764696 Renyi Hou
 //
-//  MonitorViewController.swift
-//  Homie
-//
-//  Created by jinghan liang on 2017/10/7.
-//  Copyright © 2017年 Microsoft. All rights reserved.
-//
+//  Created by group:homie on 2017/9/20.
+//  Copyright © 2017 group:Homie. All rights reserved.
+
+//MonitorViewController.swift
+//This is the board for whom aiming to monitor friend's location (to become the friend's companion) only if receiving the friend's msg with the friend's username and access code. Friend's location will be refreshed every 5 secs. On the map, it also shows the real-time location, the rest distance and time to destination
 
 import UIKit
 import GoogleMaps
@@ -28,28 +33,50 @@ class MonitorViewController: UIViewController, GMSMapViewDelegate,CLLocationMana
     @IBOutlet weak var transMode: UITextField!
     @IBOutlet weak var distance: UITextField!
     @IBOutlet weak var googleMaps: GMSMapView!
+    @IBOutlet weak var loadingWait: UIActivityIndicatorView!
+    @IBOutlet weak var nameInput: UITextField!
+    
+    @IBOutlet weak var callBtn: UIButton!
+
+    @IBOutlet weak var watchLoginView: UIView!
     
     var distanceRest:String?
     var arriveTimeRest:String?
     var friendLocation = CLLocation()
     var userID = ""
     var userName = ""
+    var friPhoNum = ""
     var locationStart = CLLocation()
     var locationEnd = CLLocation()
     var travelModes = "driving"
+    var friendMarker = GMSMarker()
     
     let client = MSClient(applicationURLString: "https://homie.azurewebsites.net")
     var table : MSTable!
+    
     //***************************************************************//
-    //************************** Load View **************************//
+    //************************** Load View *************************//
     //**************************************************************//
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.addSubview(watchLoginView)
+        googleMaps.isHidden = true
+    }
+    
+    //***************************************************************//
+    //********************* Watching View Load **********************//
+    //**************************************************************//
+    @IBAction func enterBtn(_ sender: UIButton) {
         
+        watchLoginView.isHidden = true
+        watchLoginView.endEditing(true)
+        googleMaps.isHidden = false
+        userID = nameInput.text!
+        loadingWait.startAnimating()
         var timer : Timer!
         table = client.table(withName: "user_location")
-       
+        
         //obtain the friend's start and end place
         let query = table.query(with: NSPredicate(format: "id == \(userID)"))
         query.read(completion: {(result, error) in
@@ -61,6 +88,7 @@ class MonitorViewController: UIViewController, GMSMapViewDelegate,CLLocationMana
                     self.userName = (item["user_name"] as? String)!
                     //setup the "you are watching at:"
                     self.userNameText.text?.append(self.userName)
+                    self.friPhoNum = String((item["user_phoneNum"])! as! Int)
                     self.travelModes = (item["tra_mode"] as? String)!
                     //setup the traveling modes: car, bus, walk, cycling
                     self.transMode.text = self.travelModes
@@ -84,13 +112,18 @@ class MonitorViewController: UIViewController, GMSMapViewDelegate,CLLocationMana
                     self.googleMaps.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 30.0))
                 }
             }})
+        callBtn.setImage(#imageLiteral(resourceName: "call"), for: UIControlState.normal)
+        
         googleMaps.addSubview(infoView)
-        //timer starts, every 10 seconds send a request to obtation the user's location
-        timer = Timer.scheduledTimer(timeInterval: 10, target: self, selector:#selector(updateFriendLocation), userInfo: nil, repeats: true)
+        //timer starts, every 5 seconds send a request to obtation the user's location
+        timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector:#selector(updateFriendLocation), userInfo: nil, repeats: true)
+        loadingWait.stopAnimating()
     }
-    
-    
+
+    // update the friend's location every 5 secs.
     @objc func updateFriendLocation(){
+        
+        friendMarker.map = nil
         //obtain the friend's real-time location
         table = client.table(withName: "user_location")
         let query = table.query(with: NSPredicate(format: "id == \(userID)"))
@@ -102,7 +135,10 @@ class MonitorViewController: UIViewController, GMSMapViewDelegate,CLLocationMana
                     let curr_lat = Double(item["user_latitude"]as! String)
                     let curr_long = Double(item["user_longitude"]as!  String)
                     self.friendLocation = CLLocation(latitude: curr_lat!, longitude: curr_long!)
-                    self.createMarker(titleMarker: "Your fiend's location:", iconMarker: #imageLiteral(resourceName: "friendpin"), latitude: self.friendLocation.coordinate.latitude, longitude: self.friendLocation.coordinate.longitude)
+                    self.friendMarker.position = CLLocationCoordinate2DMake(curr_lat!, curr_long!)
+                    self.friendMarker.title = "Your friend's location:"
+                    self.friendMarker.icon = #imageLiteral(resourceName: "friendpin")
+                    self.friendMarker.map = self.googleMaps
                     self.drawPath(startLocation: self.locationStart, endLocation: self.friendLocation, routeColor: UIColor.lightGray, travelMode: self.travelModes)
                     // request rest time and distance
                     self.timeAndDistanceRequest(startLocation: self.friendLocation, endLocation: self.locationEnd,travelMode: self.travelModes)
@@ -111,6 +147,23 @@ class MonitorViewController: UIViewController, GMSMapViewDelegate,CLLocationMana
         
         print("finish updating!!!!")
     }
+    
+    // "call" button to call the friend
+    @IBAction func callFriend(_ sender: UIButton) {
+        let urlString = "telprompt://\(friPhoNum)"
+        if let url = URL(string: urlString) {
+            //process based on different IOS version
+            if #available(iOS 10, *) {
+                UIApplication.shared.open(url, options: [:],
+                                          completionHandler: {
+                                            (success) in
+                })
+            } else {
+                UIApplication.shared.openURL(url)
+            }
+        }
+    }
+    
     //************************************************************************//
     //**************************** Map Controller ****************************//
     //************************************************************************//
@@ -183,19 +236,6 @@ class MonitorViewController: UIViewController, GMSMapViewDelegate,CLLocationMana
                 polyline.strokeColor = routeColor
                 
                 polyline.map = self.googleMaps
-                
-//                //obtain the travelling duration and distance based on different traveling modes
-//                let legs = route["legs"].arrayValue
-//                for leg in legs
-//                {
-//                    let duration = leg["duration"].dictionary?["text"]?.stringValue
-//                    let distance = leg["distance"].dictionary?["text"]?.stringValue
-//                    self.routeInfo.text = "your friend route information: "+duration! + distance!
-//                }
-//                
-//                let bounds = GMSCoordinateBounds(path: path!)
-//                self.googleMaps.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 30.0))
-//                //self.googleMaps.camera = camera
             }
             
         }
@@ -226,10 +266,6 @@ class MonitorViewController: UIViewController, GMSMapViewDelegate,CLLocationMana
                     self.arriveTimeRest = leg["duration"].dictionary?["text"]?.stringValue
                     self.distanceRest = leg["distance"].dictionary?["text"]?.stringValue
                 }
-                
-//                let bounds = GMSCoordinateBounds(path: path!)
-//                self.googleMaps.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 30.0))
-                //self.googleMaps.camera = camera
             }
             self.arriveTime.text? = self.arriveTimeRest!
             self.distance.text? = self.distanceRest!

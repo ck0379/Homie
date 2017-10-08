@@ -1,7 +1,16 @@
-// ----------------------------------------------------------------------------
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// ----------------------------------------------------------------------------
-//
+// COMP90018 Mobile Computing Assgnment2
+// IOS Mobile APP: Homie  - Become your safe companions on your way.
+// Group Member:
+// 732329 Jinghan Liang
+// 732355 Zhen Jia
+// 764696 Renyi Hou
+//  
+//  Created by group:homie on 2017/9/20.
+//  Copyright © 2017 group:Homie. All rights reserved.
+
+//MapViewController.swift
+//This controls the main load page, implemented the map-about function, including: places selection, start and end route direction, transport modes transfer, help-about functions, especally detecting the phone's shaking or not.Here also is a entry to "add companions" board.
+
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -13,6 +22,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
+
+
+
 import UIKit
 import GoogleMaps
 import GooglePlaces
@@ -77,16 +89,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate,CLLocationManagerD
         displayLabel.text = ""
         table = client.table(withName: "user_location")
         
-        // predefined 4 items to assume other 3 are the user's friends
-//        let itemToInsert = ["id":"003","user_longitude": "number3","user_latitude":"number3","user_name": "hao","user_phoneNum":"6188889999"] as [String : Any]
-//
-//        self.table!.insert(itemToInsert) {
-//            (item, error) in
-//            if error != nil {
-//                print("Error: " + (error! as NSError).description)
-//            }
-//        }
-        
+
        
         let query = table?.query(with: NSPredicate(format: "id == \(user_id)"))
         query?.read(completion: {(result, error) in
@@ -136,7 +139,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate,CLLocationManagerD
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
-        
+        self.googleMaps.clear()
         let location = locations.last
         print (location)
         displayLabel.text = String(describing: location?.coordinate.latitude)
@@ -307,7 +310,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate,CLLocationManagerD
     
     // Mark: "End" the route direction
     @IBAction func endDirection(_ sender: UIButton) {
-        
+        displayLabel.text = ""
         let endActionsheet = UIAlertController(title: "", message: "", preferredStyle:UIAlertControllerStyle.actionSheet)
         let cancelAction = UIAlertAction(title: "Cancle", style: UIAlertActionStyle.cancel, handler: nil)
         let endTripAction = UIAlertAction(title: "End the trip", style: UIAlertActionStyle.default, handler: { (action) -> Void in
@@ -390,7 +393,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate,CLLocationManagerD
     }
     
     func configuredMessageComposeViewController() -> MFMessageComposeViewController{
-        let phones = ["0426499520"];
+        let phones = ["0400000000","0488886666","0499995555"];
         let messageComposeVC = MFMessageComposeViewController()
         messageComposeVC.messageComposeDelegate = self
         messageComposeVC.recipients = phones
@@ -406,8 +409,8 @@ class MapViewController: UIViewController, GMSMapViewDelegate,CLLocationManagerD
     
     // Mark: "Call Police " button : call "000"
     @IBAction func callPoliceBtn(_ sender: UIButton) {
-        //automatically turn to Phone page and dial
-        let urlString = "telprompt://0426499520"
+        
+        let urlString = "telprompt://000"
         if let url = URL(string: urlString) {
             //process based on different IOS version
             if #available(iOS 10, *) {
@@ -450,9 +453,20 @@ class MapViewController: UIViewController, GMSMapViewDelegate,CLLocationManagerD
             countdownTimer.lineColor = UIColor.green
             countdownTimer.sizeToFit()
             countdownTimer.lineWidth = 6
-            countdownTimer.start(beginingValue: 30, interval: 1)
+            countdownTimer.start(beginingValue: 15, interval: 1)
             self.safetyBtn.layer.cornerRadius = self.safetyBtn.frame.size.width/2
             self.safetyBtn.backgroundColor = UIColor.white
+            
+            while(countdownTimer.isEnd()){
+                //pop up the danger notification view
+                let dangerActionsheet = UIAlertController(title: "", message: "Your friends have been notified!", preferredStyle: UIAlertControllerStyle.alert)
+                let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: {(action) -> Void in
+                    self.alertView.isHidden = true
+                })
+                
+                dangerActionsheet.addAction(okAction)
+                self.present(dangerActionsheet, animated: true, completion: nil)
+            }
         }
     }
     
@@ -481,32 +495,32 @@ class MapViewController: UIViewController, GMSMapViewDelegate,CLLocationManagerD
             companionController.userID = self.user_id
             companionController.delegate = self
         }
-        else if segue.identifier == "monitorStart" {
-            let monitorScreen = segue.destination as! MonitorViewController
-            monitorScreen.userID = "\(user_id)"
-        }
+//        else if segue.identifier == "monitorStart" {
+//            let monitorScreen = segue.destination as! MonitorViewController
+//            monitorScreen.userID = "001"
+//        }
     }
     
-    @IBAction func invitation(_ sender: UIButton) {
-        let invitationActionsheet = UIAlertController(title: "", message: "Your friend invites you to become the companion", preferredStyle: UIAlertControllerStyle.alert)
-        let refuseAction = UIAlertAction(title: "Refuse:(", style: UIAlertActionStyle.cancel, handler: nil)
-        let acceptAction = UIAlertAction(title: "I accept:)", style: UIAlertActionStyle.default, handler: { (action) -> Void in
-            //self.view.insertSubview(self.monitor, aboveSubview: self.view)
-            self.performSegue(withIdentifier: "monitorStart", sender: self)
-        })
-        
-        invitationActionsheet.addAction(refuseAction)
-        invitationActionsheet.addAction(acceptAction)
-        self.present(invitationActionsheet, animated: true, completion: nil)
-    }
+//    @IBAction func invitation(_ sender: UIButton) {
+//        let invitationActionsheet = UIAlertController(title: "", message: "Your friend invites you to become the companion", preferredStyle: UIAlertControllerStyle.alert)
+//        let refuseAction = UIAlertAction(title: "Refuse:(", style: UIAlertActionStyle.cancel, handler: nil)
+//        let acceptAction = UIAlertAction(title: "I accept:)", style: UIAlertActionStyle.default, handler: { (action) -> Void in
+//            //self.view.insertSubview(self.monitor, aboveSubview: self.view)
+//            self.performSegue(withIdentifier: "monitorStart", sender: self)
+//        })
+//        
+//        invitationActionsheet.addAction(refuseAction)
+//        invitationActionsheet.addAction(acceptAction)
+//        self.present(invitationActionsheet, animated: true, completion: nil)
+//    }
     
     
     func didCompanions(companions: [String]) {
         self.selectedCompanions = companions
         var msg = ""
         if(self.selectedCompanions != nil){
-        var msg = "Your friend:\n"
-        for friend in selectedCompanions{
+            msg = "Your friend:\n"
+            for friend in selectedCompanions{
             msg.append("\(friend)")
             msg.append("\n")
         }
@@ -520,6 +534,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate,CLLocationManagerD
         let confirmAction = UIAlertAction(title: "Confirm", style: UIAlertActionStyle.cancel, handler: nil)
         selectBackMsg.addAction(confirmAction)
         self.present(selectBackMsg, animated: true, completion: nil)
+        
     }
     
 }
