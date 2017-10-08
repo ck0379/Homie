@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C70D7901F88F7B100BCC885 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C70D78F1F88F7B100BCC885 /* LoginViewController.swift */; };
+		0C8376841F8858B900FAADA9 /* MonitorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C8376831F8858B900FAADA9 /* MonitorViewController.swift */; };
+		0C87C6481F8993F90010F6A0 /* AddCompanionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C87C6471F8993F90010F6A0 /* AddCompanionViewController.swift */; };
 		9C35A4B41DE4EF8000650581 /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C35A4B31DE4EF8000650581 /* SafariServices.framework */; };
 		9C35A4B61DE4EF8500650581 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C35A4B51DE4EF8500650581 /* Security.framework */; };
 		9CA121761DAC7FFD000C2FCA /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CA121751DAC7FFD000C2FCA /* WebKit.framework */; };
@@ -15,7 +18,6 @@
 		A2D9CBCC1943C2540017F096 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2D9CBCA1943C2540017F096 /* Main.storyboard */; };
 		A2D9CBCE1943C2540017F096 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2D9CBCD1943C2540017F096 /* Images.xcassets */; };
 		A2D9CBE41943C39D0017F096 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D9CBE31943C39D0017F096 /* MapViewController.swift */; };
-		A2E767C6194594DC00869113 /* ToDoItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E767C5194594DC00869113 /* ToDoItemViewController.swift */; };
 		A31A89F71BF3FDFA00C7B656 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A31A89F61BF3FDFA00C7B656 /* Launch Screen.storyboard */; };
 		A3BBD77D1C05181600DD0DB0 /* MicrosoftAzureMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3BBD77C1C05181600DD0DB0 /* MicrosoftAzureMobile.framework */; };
 		F7229E9DD9F84A761A791D1F /* Pods_Homie.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9FD7D0AF91FACF1B09BE975 /* Pods_Homie.framework */; };
@@ -23,6 +25,9 @@
 
 /* Begin PBXFileReference section */
 		030A567D0EEC5EC45CFB29A9 /* Pods-Homie.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Homie.release.xcconfig"; path = "Pods/Target Support Files/Pods-Homie/Pods-Homie.release.xcconfig"; sourceTree = "<group>"; };
+		0C70D78F1F88F7B100BCC885 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		0C8376831F8858B900FAADA9 /* MonitorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MonitorViewController.swift; sourceTree = "<group>"; };
+		0C87C6471F8993F90010F6A0 /* AddCompanionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCompanionViewController.swift; sourceTree = "<group>"; };
 		252C1A7EFAF1A9E9837E33F8 /* Pods-Homie.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Homie.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Homie/Pods-Homie.debug.xcconfig"; sourceTree = "<group>"; };
 		9C35A4B31DE4EF8000650581 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		9C35A4B51DE4EF8500650581 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -35,7 +40,6 @@
 		A2D9CBCD1943C2540017F096 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A2D9CBE31943C39D0017F096 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		A2D9CBE81943D1340017F096 /* Homie-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Homie-Bridging-Header.h"; sourceTree = "<group>"; };
-		A2E767C5194594DC00869113 /* ToDoItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoItemViewController.swift; sourceTree = "<group>"; };
 		A31A89F61BF3FDFA00C7B656 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		A3BBD77C1C05181600DD0DB0 /* MicrosoftAzureMobile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MicrosoftAzureMobile.framework; sourceTree = "<group>"; };
 		D9FD7D0AF91FACF1B09BE975 /* Pods_Homie.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Homie.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -104,7 +108,9 @@
 				A2D9CBCD1943C2540017F096 /* Images.xcassets */,
 				A2D9CBC11943C2540017F096 /* Supporting Files */,
 				A2D9CBE31943C39D0017F096 /* MapViewController.swift */,
-				A2E767C5194594DC00869113 /* ToDoItemViewController.swift */,
+				0C70D78F1F88F7B100BCC885 /* LoginViewController.swift */,
+				0C8376831F8858B900FAADA9 /* MonitorViewController.swift */,
+				0C87C6471F8993F90010F6A0 /* AddCompanionViewController.swift */,
 				A2D9CBE51943CB520017F096 /* frameworks */,
 				A2D9CBE81943D1340017F096 /* Homie-Bridging-Header.h */,
 				A31A89F61BF3FDFA00C7B656 /* Launch Screen.storyboard */,
@@ -272,9 +278,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2E767C6194594DC00869113 /* ToDoItemViewController.swift in Sources */,
+				0C70D7901F88F7B100BCC885 /* LoginViewController.swift in Sources */,
 				A2BD20971AC8A731007F7181 /* QSTodoDataModel.xcdatamodeld in Sources */,
 				A2D9CBE41943C39D0017F096 /* MapViewController.swift in Sources */,
+				0C87C6481F8993F90010F6A0 /* AddCompanionViewController.swift in Sources */,
+				0C8376841F8858B900FAADA9 /* MonitorViewController.swift in Sources */,
 				A2D9CBC41943C2540017F096 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -35,7 +35,7 @@ enum travelModes:String{
 }
 
 
-class MapViewController: UIViewController, GMSMapViewDelegate,CLLocationManagerDelegate,MFMessageComposeViewControllerDelegate {
+class MapViewController: UIViewController, GMSMapViewDelegate,CLLocationManagerDelegate,MFMessageComposeViewControllerDelegate,SelectCompanionDelegate {
     
     //**************************************************************//
     //******************Variables Declaration***********************//
@@ -62,18 +62,50 @@ class MapViewController: UIViewController, GMSMapViewDelegate,CLLocationManagerD
     var locationStart = CLLocation()
     var locationEnd = CLLocation()
     
+    var user_id = ""
+    var selectedCompanions : [String] = []
+    let client = MSClient(applicationURLString: "https://homie.azurewebsites.net")
+    var table : MSTable!
+    
     //***************************************************************//
     //************************** Load View **************************//
     //**************************************************************//
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        displayLabel.text = ""
+        table = client.table(withName: "user_location")
+        
+        // predefined 4 items to assume other 3 are the user's friends
+//        let itemToInsert = ["id":"003","user_longitude": "number3","user_latitude":"number3","user_name": "hao","user_phoneNum":"6188889999"] as [String : Any]
+//
+//        self.table!.insert(itemToInsert) {
+//            (item, error) in
+//            if error != nil {
+//                print("Error: " + (error! as NSError).description)
+//            }
+//        }
+        
+       
+        let query = table?.query(with: NSPredicate(format: "id == \(user_id)"))
+        query?.read(completion: {(result, error) in
+            if let err = error {
+                print("ERROR ", err)
+            } else if let items = result?.items {
+                for item in items {
+                    print("user location: ", item["user_longitude"]!)
+                }
+            }})
+        
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
+        
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.startMonitoringSignificantLocationChanges()
+        //locationManager.startMonitoringSignificantLocationChanges()
+        
         
         //Map initiation code
         let camera = GMSCameraPosition.camera(withLatitude: -33.86, longitude: 151.20, zoom: 8.0)
@@ -104,11 +136,23 @@ class MapViewController: UIViewController, GMSMapViewDelegate,CLLocationManagerD
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
+        
         let location = locations.last
-        createMarker(titleMarker: "You are in:", iconMarker: #imageLiteral(resourceName: "mapspin") , latitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!)
+        print (location)
+        displayLabel.text = String(describing: location?.coordinate.latitude)
+        //displayLabel.text?.append(String(location?.coordinate.longitude))
+        // update the database
+        let itemToUpdate = ["id":"\(user_id)","user_latitude":location?.coordinate.latitude,"user_longitude":location?.coordinate.longitude] as [String : Any]
         
-        self.locationManager.stopUpdatingLocation()
-        
+        self.table!.update(itemToUpdate) {
+            (item, error) in
+            if error != nil {
+                print("Error: " + (error! as NSError).description)
+            }
+            else {
+                print("Updated the current location")}
+        }
+        //createMarker(titleMarker: "You are in:", iconMarker: #imageLiteral(resourceName: "friendpin") , latitude: (location?.coordinate.latitude)!, longitude: (location?.coordinate.longitude)!)
     }
     
     
@@ -155,8 +199,8 @@ class MapViewController: UIViewController, GMSMapViewDelegate,CLLocationManagerD
     func drawPath(startLocation: CLLocation, endLocation: CLLocation)
     {
         googleMaps.clear()
-        createMarker(titleMarker: "Start", iconMarker: #imageLiteral(resourceName: "mapspin"), latitude: startLocation.coordinate.latitude, longitude:startLocation.coordinate.longitude)
-        createMarker(titleMarker: "End", iconMarker: #imageLiteral(resourceName: "mapspin"), latitude: endLocation.coordinate.latitude, longitude:endLocation.coordinate.longitude)
+        createMarker(titleMarker: "Start", iconMarker: #imageLiteral(resourceName: "pinkpin"), latitude: startLocation.coordinate.latitude, longitude:startLocation.coordinate.longitude)
+        createMarker(titleMarker: "End", iconMarker: #imageLiteral(resourceName: "greenpin"), latitude: endLocation.coordinate.latitude, longitude:endLocation.coordinate.longitude)
         let origin = "\(startLocation.coordinate.latitude),\(startLocation.coordinate.longitude)"
         let destination = "\(endLocation.coordinate.latitude),\(endLocation.coordinate.longitude)"
         
@@ -183,9 +227,8 @@ class MapViewController: UIViewController, GMSMapViewDelegate,CLLocationManagerD
                 polyline.strokeColor = UIColor.red
                 
             
-                let bounds = GMSCoordinateBounds(coordinate: startLocation.coordinate, coordinate:endLocation.coordinate)
-                let camera = self.googleMaps.camera(for: bounds, insets:UIEdgeInsets())!
-                self.googleMaps.camera = camera
+                let bounds = GMSCoordinateBounds(path: path!)
+                self.googleMaps.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 30.0))
                 
                 polyline.map = self.googleMaps
                 
@@ -220,6 +263,7 @@ class MapViewController: UIViewController, GMSMapViewDelegate,CLLocationManagerD
         self.locationManager.stopUpdatingLocation()
         
         self.present(autoCompleteController, animated: true, completion: nil)
+        
     }
     
     // Mark: select destination
@@ -241,7 +285,20 @@ class MapViewController: UIViewController, GMSMapViewDelegate,CLLocationManagerD
     
     // Mark: "Start" the route direction
     @IBAction func showDirection(_ sender: UIButton) {
-        // when button direction tapped, must call drawpath func
+        
+        // update the database
+        let itemToUpdate = ["id":"\(user_id)","ori_lat":locationStart.coordinate.latitude,"ori_long":locationStart.coordinate.longitude,"des_lat":locationEnd.coordinate.latitude,"des_long":locationEnd.coordinate.longitude,"tra_mode":travelMode] as [String : Any]
+        
+        self.table!.update(itemToUpdate) {
+            (item, error) in
+            if error != nil {
+                print("Error: " + (error! as NSError).description)
+            }
+            else {
+                print("Updated the route information")}
+        }
+        
+        // "start" to drawpath
         self.drawPath(startLocation: locationStart, endLocation: locationEnd)
         start.isHidden = true;
         end.isHidden = false;
@@ -259,7 +316,6 @@ class MapViewController: UIViewController, GMSMapViewDelegate,CLLocationManagerD
             self.end.isHidden = true
             self.startLocation.text = ""
             self.destinationLocation.text = ""
-            self.displayLabel.text = ""
         })
         let arriveSafelyAction = UIAlertAction(title: "I've arrived safely", style: UIAlertActionStyle.default, handler: { (action) -> Void in
             self.googleMaps.clear()
@@ -299,6 +355,18 @@ class MapViewController: UIViewController, GMSMapViewDelegate,CLLocationManagerD
         else{
             travelMode = travelModes.transit.rawValue
         }
+        // update the database
+        let itemToUpdate = ["id":"\(user_id)","tra_mode":travelMode] as [String : Any]
+        
+        self.table!.update(itemToUpdate) {
+            (item, error) in
+            if error != nil {
+                print("Error: " + (error! as NSError).description)
+            }
+            else {
+                print("Update the travelMode!!!")}
+        }
+
         self.drawPath(startLocation: locationStart, endLocation: locationEnd)
     }
     
@@ -394,6 +462,66 @@ class MapViewController: UIViewController, GMSMapViewDelegate,CLLocationManagerD
         alertView.isHidden = true
     }
     
+    
+    //********************************************************************************//
+    //********************************* Add Companions *******************************//
+    //********************************************************************************//
+    
+    // MARK: Navigation
+
+    @IBAction func addCompanionBtn(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "addCompanion", sender: self)
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any!)
+    {
+        if segue.identifier == "addCompanion" {
+            let companionController = segue.destination as! AddCompanionViewController
+            companionController.userID = self.user_id
+            companionController.delegate = self
+        }
+        else if segue.identifier == "monitorStart" {
+            let monitorScreen = segue.destination as! MonitorViewController
+            monitorScreen.userID = "\(user_id)"
+        }
+    }
+    
+    @IBAction func invitation(_ sender: UIButton) {
+        let invitationActionsheet = UIAlertController(title: "", message: "Your friend invites you to become the companion", preferredStyle: UIAlertControllerStyle.alert)
+        let refuseAction = UIAlertAction(title: "Refuse:(", style: UIAlertActionStyle.cancel, handler: nil)
+        let acceptAction = UIAlertAction(title: "I accept:)", style: UIAlertActionStyle.default, handler: { (action) -> Void in
+            //self.view.insertSubview(self.monitor, aboveSubview: self.view)
+            self.performSegue(withIdentifier: "monitorStart", sender: self)
+        })
+        
+        invitationActionsheet.addAction(refuseAction)
+        invitationActionsheet.addAction(acceptAction)
+        self.present(invitationActionsheet, animated: true, completion: nil)
+    }
+    
+    
+    func didCompanions(companions: [String]) {
+        self.selectedCompanions = companions
+        var msg = ""
+        if(self.selectedCompanions != nil){
+        var msg = "Your friend:\n"
+        for friend in selectedCompanions{
+            msg.append("\(friend)")
+            msg.append("\n")
+        }
+        msg.append("has been notified!")
+        //print (msg)
+        }
+        else{
+            msg = "No friend is notified!"
+        }
+        let selectBackMsg = UIAlertController(title: "", message: msg, preferredStyle: UIAlertControllerStyle.alert)
+        let confirmAction = UIAlertAction(title: "Confirm", style: UIAlertActionStyle.cancel, handler: nil)
+        selectBackMsg.addAction(confirmAction)
+        self.present(selectBackMsg, animated: true, completion: nil)
+    }
+    
 }
 
 //******************************************************************************//
@@ -418,11 +546,13 @@ extension MapViewController: GMSAutocompleteViewControllerDelegate {
         if locationSelected == .startLocation {
             startLocation.text = "\(place.name)"
             locationStart = CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
-            createMarker(titleMarker: "Start:"+"\(place.name)", iconMarker: #imageLiteral(resourceName: "mapspin"), latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+            createMarker(titleMarker: "Start:"+"\(place.name)", iconMarker: #imageLiteral(resourceName: "pinkpin"), latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+            
         } else {
             destinationLocation.text = "\(place.name)"
             locationEnd = CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
-            createMarker(titleMarker: "End:"+"\(place.name)", iconMarker: #imageLiteral(resourceName: "mapspin"), latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+            createMarker(titleMarker: "End:"+"\(place.name)", iconMarker: #imageLiteral(resourceName: "greenpin"), latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+
         }
 
         self.googleMaps.camera = camera
